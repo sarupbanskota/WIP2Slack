@@ -73,6 +73,31 @@ class TodoList
   def with_hashtag(todos, hashtag)
     todos.select { |todo| todo["body"].include? hashtag }
   end
+
+  def format(todos)
+    list = '```Completed today:'
+    todos.each do |todo|
+      list += %{\n  -[x] #{todo["body"].split("#").first}}
+    end
+    list += '```'
+    list
+  end
+end
+
+class SlackAPI
+
+  def make_request(content)
+    uri = URI.parse(ENV["SLACK_WEBHOOK_URL"])
+    header = {'Content-Type': 'application/json'}
+    message = {'text': content}
+    http = Net::HTTP.new(uri.host, uri.port)
+    http.use_ssl = true
+    request = Net::HTTP::Post.new(uri.request_uri, header)
+    request.body = message.to_json
+    puts request.body
+    response = http.request(request)
+    response
+  end
 end
 
 today = Time.now.to_s.split(" ").first
@@ -82,4 +107,7 @@ todo_list = TodoList.new
 todos = wip.list_completed_todos_by_user(ENV["WIP_USER_ID"])
 todays_todos = todo_list.updated_at(todos, today)
 
-puts todo_list.with_hashtag(todays_todos, ENV["WIP_PROJECT_NAME"])
+project_todos_completed_today = todo_list.with_hashtag(todays_todos, ENV["WIP_PROJECT_NAME"])
+
+slack = SlackAPI.new
+puts slack.make_request(todo_list.format(project_todos_completed_today))
