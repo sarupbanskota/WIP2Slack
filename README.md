@@ -1,4 +1,20 @@
-# List all WIP completed todos for specific project
+# Sync WIP completed todos to your Slack channel
+
+:one: [Setup an incoming webhook](https://my.slack.com/services/new/incoming-webhook) and note your `Incoming webhook URL`. You can choose which channel to post to in this step. Whichever your boss isn't part of, *obviously*.
+
+:two: [Obtain your `WIP private API key` URL](https://wip.chat/api) from the API page.
+
+:three: Determine your User ID - first complete a todo, then [visit the GraphiQL instance](https://wip.chat/graphiql). Type in the following and you should see your name at the top:
+```js
+{
+  todos {
+    user {
+      id
+      username
+    }
+  }
+}
+```
 
 Export all necessary environment variables
 
@@ -6,6 +22,7 @@ Export all necessary environment variables
  > export WIP_USER_ID=1096
  > export WIP_PROJECT_NAME=rojak
  > export WIP_API_KEY=xxxxx
+ > export SLACK_WEBHOOK_URL=xxxx
  ```
  
 Run the main file:
@@ -13,7 +30,7 @@ Run the main file:
 ```sh
 > ruby main.rb
 
-> {"id"=>"46644", "body"=>"Sync WIP todos to ZH slack #rojak", "updated_at"=>"2018-04-21T03:19:21Z"}
+> #<Net::HTTPOK:0x00007ff91c119d20>
 ```
 
-That's all for today, folks!
+Now get back to work.
