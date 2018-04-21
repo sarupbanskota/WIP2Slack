@@ -100,7 +100,7 @@ class SlackAPI
   end
 end
 
-today = Time.now.to_s.split(" ").first
+today = Time.now.getlocal('+00:00').to_s.split(" ").first
 wip = WIP.new(api_key: ENV["WIP_API_KEY"])
 todo_list = TodoList.new
 
