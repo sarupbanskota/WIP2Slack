@@ -76,7 +76,7 @@ class TodoList
 
   def format(todos)
     list = '```Completed today:'
-    todos.each do |todo|
+    todos.reverse_each do |todo|
       list += %{\n  -[x] #{todo["body"].split("#").first}}
     end
     list += '```'
