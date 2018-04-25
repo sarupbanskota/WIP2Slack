@@ -2,6 +2,7 @@
 # WIP_API_KEY
 # WIP_PROJECT_NAME
 # WIP_USER_ID
+# SLACK_WEBHOOK_URL
 
 require "net/http"
 require "uri"
