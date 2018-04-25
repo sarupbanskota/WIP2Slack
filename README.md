@@ -1,10 +1,12 @@
-# Sync WIP completed todos to your Slack channel
 
-:one: [Setup an incoming webhook](https://my.slack.com/services/new/incoming-webhook) and note your `Incoming webhook URL`. You can choose which channel to post to in this step. Whichever your boss isn't part of, *obviously*.
+
+# Sync today's WIP completed todos to your Slack channel
+
+:one: [Setup an incoming webhook](https://my.slack.com/services/new/incoming-webhook) and note your `Incoming webhook URL`. You can choose which channel to post to in this step. If you've got multiple project channels you want to post to, you could setup multiple incoming hooks.
 
 :two: [Obtain your `WIP private API key` URL](https://wip.chat/api) from the API page.
 
-:three: Determine your User ID - first complete a todo, then [visit the GraphiQL instance](https://wip.chat/graphiql). Type in the following and you should see your name at the top:
+:three: Determine your WIP User ID - first complete a todo, then [visit the GraphiQL instance](https://wip.chat/graphiql). Type in the following and you should see your name at the top:
 ```js
 {
   todos {
